@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import GapBox from 'components/GapBox';
 import Button from 'components/Button';
+import ListTab from './components/ListTab';
 
 import * as styles from './style';
 
@@ -16,7 +17,7 @@ const subRouters = [
     path: '/',
     nav: '리스트',
     exact: true,
-    children: <div>list </div>,
+    children: <ListTab />,
   },
   {
     path: '/new',
@@ -55,13 +56,12 @@ function Main() {
             );
           })}
         </GapBox>
+        <Switch>
+          {subRouters.map((route) => {
+            return <Route key={route.path} {...route} />;
+          })}
+        </Switch>
       </GapBox>
-
-      <Switch>
-        {subRouters.map((route) => {
-          return <Route key={route.path} {...route} />;
-        })}
-      </Switch>
     </styles.Container>
   );
 }
