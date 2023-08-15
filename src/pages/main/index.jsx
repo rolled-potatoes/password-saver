@@ -9,6 +9,7 @@ import {
 import GapBox from 'components/GapBox';
 import Button from 'components/Button';
 import ListTab from './components/ListTab';
+import NewTab from './components/NewTab';
 
 import * as styles from './style';
 
@@ -22,7 +23,7 @@ const subRouters = [
   {
     path: '/new',
     nav: '생성',
-    children: <div>new</div>,
+    children: <NewTab/>,
   },
 ];
 

@@ -9,5 +9,6 @@ export const GlobalStyle = createGlobalStyle`
     --divider :#DEE2E6;
     --gray-600: #868E96;
     --gray-200: #E9ECEF;
+    --blue-800 : #1971c2;
   }
 `;
