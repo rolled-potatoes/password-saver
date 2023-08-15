@@ -1,5 +1,5 @@
 ---
-to: <% if(locals.path){ %> <%= path %>/<%= name %>/<%= name %>.jsx <%} else { %>src/components/<%= name %>/<%= name %>.jsx<%} %>
+to: <% if(locals.path){ %><%= path %>/<%= name %>/<%= name %>.jsx<%} else { %>src/components/<%= name %>/<%= name %>.jsx<%} %>
 ---
 import React from 'react';
 import * as styles from './style';
