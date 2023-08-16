@@ -1,15 +1,18 @@
 import { Main } from './pages';
+import { QueryClientProvider, QueryClient } from 'react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { GlobalStyle } from 'styles/global';
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Router>
         <GlobalStyle />
         <Main />
       </Router>
-    </>
+    </QueryClientProvider>
   );
 }
 
