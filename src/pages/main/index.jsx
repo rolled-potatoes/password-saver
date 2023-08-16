@@ -23,7 +23,7 @@ const subRouters = [
   {
     path: '/new',
     nav: '생성',
-    children: <NewTab/>,
+    children: <NewTab />,
   },
 ];
 
@@ -34,6 +34,12 @@ function Main() {
   const handleClick = (path) => () => {
     history.push(path);
   };
+
+  React.useEffect(() => {
+    import('octokit').then(res=>{
+      console.log(res)
+    })
+  }, []);
 
   return (
     <styles.Container>
