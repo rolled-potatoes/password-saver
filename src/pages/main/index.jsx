@@ -35,12 +35,6 @@ function Main() {
     history.push(path);
   };
 
-  React.useEffect(() => {
-    import('octokit').then(res=>{
-      console.log(res)
-    })
-  }, []);
-
   return (
     <styles.Container>
       <GapBox gap={10}>
@@ -64,9 +58,11 @@ function Main() {
           })}
         </GapBox>
         <Switch>
-          {subRouters.map((route) => {
-            return <Route key={route.path} {...route} />;
-          })}
+          <React.Suspense fallback={() => <div>loader</div>}>
+            {subRouters.map((route) => {
+              return <Route key={route.path} {...route} />;
+            })}
+          </React.Suspense>
         </Switch>
       </GapBox>
     </styles.Container>
