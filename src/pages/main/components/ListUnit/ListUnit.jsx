@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom'
 import * as styles from './style';
 import Label from 'components/Label';
 import Button from 'components/Button';
@@ -16,6 +17,7 @@ const LabelGroup = ({ label, text }) => {
   );
 };
 const ListUnit = (props) => {
+  const history = useHistory();
   const { name, id, pw, removeItem } = props;
 
   const handleClickCopy = () => {
@@ -36,6 +38,10 @@ const ListUnit = (props) => {
     removeItem();
   };
 
+  const handleClickEdit = ()=>{
+    history.push(`/new/${name}`)
+  }
+
   return (
     <styles.ListUnit>
       <GapBox gap={8}>
@@ -47,7 +53,7 @@ const ListUnit = (props) => {
             <LabelGroup label={'계정'} text={id} />
           </div>
           <GapBox row gap={10}>
-            <Button color="primary" size="sm">
+            <Button color="primary" size="sm" onClick={handleClickEdit}>
               수정
             </Button>
             <Button color="danger" size="sm" onClick={handleClickRemove}>

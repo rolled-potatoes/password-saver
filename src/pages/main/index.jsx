@@ -16,12 +16,14 @@ import * as styles from './style';
 const subRouters = [
   {
     path: '/',
+    href:'/',
     nav: '리스트',
     exact: true,
     children: <ListTab />,
   },
   {
-    path: '/new',
+    path: '/new/:name?',
+    href: '/new',
     nav: '생성',
     children: <NewTab />,
   },
@@ -50,7 +52,7 @@ function Main() {
                 color={color}
                 size="sm"
                 key={route.path}
-                onClick={handleClick(route.path)}
+                onClick={handleClick(route.href)}
               >
                 {route.nav}
               </Button>
