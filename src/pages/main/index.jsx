@@ -5,6 +5,7 @@ import {
   Route,
   useLocation,
   useHistory,
+  Redirect,
 } from 'react-router-dom';
 import GapBox from 'components/GapBox';
 import Button from 'components/Button';
@@ -15,17 +16,18 @@ import * as styles from './style';
 
 const subRouters = [
   {
-    path: '/',
-    href:'/',
+    path: '/list',
+    href: '/list',
     nav: '리스트',
     exact: true,
-    children: <ListTab />,
+    Component: () => <ListTab />,
   },
   {
     path: '/new/:name?',
     href: '/new',
     nav: '생성',
-    children: <NewTab />,
+    exact: true,
+    Component: () => <NewTab />,
   },
 ];
 
@@ -60,11 +62,16 @@ function Main() {
           })}
         </GapBox>
         <Switch>
-          <React.Suspense fallback={() => <div>loader</div>}>
-            {subRouters.map((route) => {
-              return <Route key={route.path} {...route} />;
-            })}
-          </React.Suspense>
+          {subRouters.map((route) => {
+            return (
+              <Route key={route.href} {...route}>
+                <React.Suspense fallback={() => <div>loader</div>}>
+                  <route.Component />
+                </React.Suspense>
+              </Route>
+            );
+          })}
+          <Redirect to="/list" />
         </Switch>
       </GapBox>
     </styles.Container>

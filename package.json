@@ -80,7 +80,7 @@
     "start": "NODE_ENV=development concurrently \"npm run react:start\" \"npm run electron:start\" ",
     "build:xos": "electron-builder --mac",
     "build:react": "node scripts/build.js",
-    "build": "npm run build:react && npm run build:xos"
+    "build": "npm i && npm run build:react && npm run build:xos"
   },
   "eslintConfig": {
     "extends": [

@@ -394,7 +394,7 @@ module.exports = function (webpackEnv) {
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
-              include: [paths.appSrc, /node_modules\/@octokit/],
+              include: [paths.appSrc, isEnvDevelopment && /node_modules\/@octokit/].filter(Boolean),
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve(
