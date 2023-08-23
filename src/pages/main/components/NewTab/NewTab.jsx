@@ -7,10 +7,12 @@ import * as styles from './style';
 import GapBox from 'components/GapBox';
 import Button from 'components/Button';
 import LabelInput from 'components/LabelInput';
+import { BackdropLoaderContext } from 'components/BackdropLoader';
 
 import crypto from 'libs/Crypt';
 
 const Form = ({ content }) => {
+  const { toggleVisible } = BackdropLoaderContext.useBackdrop();
   const { name } = useParams();
   const target = name && Object.entries(content).find((c) => c[0] === name);
   const methods = useForm({
@@ -26,9 +28,15 @@ const Form = ({ content }) => {
   const updateMutation = useGistUpdate({
     gistId: process.env.REACT_APP_GIST_ID,
     options: {
+      onMutate: () => {
+        toggleVisible();
+      },
       onSuccess: () => {
         alert('create success');
         methods.reset();
+      },
+      onSettled: () => {
+        toggleVisible();
       },
     },
   });

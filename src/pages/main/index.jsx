@@ -11,6 +11,9 @@ import GapBox from 'components/GapBox';
 import Button from 'components/Button';
 import ListTab from './components/ListTab';
 import NewTab from './components/NewTab';
+import BackdropLoader, {
+  BackdropLoaderContext,
+} from 'components/BackdropLoader';
 
 import * as styles from './style';
 
@@ -41,39 +44,41 @@ function Main() {
 
   return (
     <styles.Container>
-      <GapBox gap={10}>
-        <GapBox row gap={8}>
-          {subRouters.map((route) => {
-            const isActive = matchPath(location.pathname, {
-              path: route.path,
-              exact: route.exact,
-            });
-            const color = isActive ? 'primary' : 'link';
-            return (
-              <Button
-                color={color}
-                size="sm"
-                key={route.path}
-                onClick={handleClick(route.href)}
-              >
-                {route.nav}
-              </Button>
-            );
-          })}
+      <BackdropLoaderContext.Provider>
+        <GapBox gap={10}>
+          <GapBox row gap={8}>
+            {subRouters.map((route) => {
+              const isActive = matchPath(location.pathname, {
+                path: route.path,
+                exact: route.exact,
+              });
+              const color = isActive ? 'primary' : 'link';
+              return (
+                <Button
+                  color={color}
+                  size="sm"
+                  key={route.path}
+                  onClick={handleClick(route.href)}
+                >
+                  {route.nav}
+                </Button>
+              );
+            })}
+          </GapBox>
+          <Switch>
+            {subRouters.map((route) => {
+              return (
+                <Route key={route.href} {...route}>
+                  <React.Suspense fallback={<BackdropLoader />}>
+                    <route.Component />
+                  </React.Suspense>
+                </Route>
+              );
+            })}
+            <Redirect to="/list" />
+          </Switch>
         </GapBox>
-        <Switch>
-          {subRouters.map((route) => {
-            return (
-              <Route key={route.href} {...route}>
-                <React.Suspense fallback={() => <div>loader</div>}>
-                  <route.Component />
-                </React.Suspense>
-              </Route>
-            );
-          })}
-          <Redirect to="/list" />
-        </Switch>
-      </GapBox>
+      </BackdropLoaderContext.Provider>
     </styles.Container>
   );
 }

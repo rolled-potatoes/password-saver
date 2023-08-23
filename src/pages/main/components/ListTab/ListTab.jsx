@@ -2,6 +2,7 @@ import React from 'react';
 import { useGist, useGistUpdate } from 'hooks/useGist';
 
 import GapBox from 'components/GapBox';
+import { BackdropLoaderContext } from 'components/BackdropLoader';
 import ListUnit from '../ListUnit';
 
 import * as styles from './style';
@@ -10,12 +11,19 @@ const ListTab = () => {
   const query = useGist({
     gistId: process.env.REACT_APP_GIST_ID,
   });
+  const { toggleVisible } = BackdropLoaderContext.useBackdrop();
 
   const updateMutation = useGistUpdate({
     gistId: process.env.REACT_APP_GIST_ID,
     options: {
+      onMutate: () => {
+        toggleVisible();
+      },
       onSuccess: () => {
         alert('remove success');
+      },
+      onSettled: () => {
+        toggleVisible();
       },
     },
   });
