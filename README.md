@@ -2,14 +2,23 @@
 
 ## 개요
 
-비밀번호를 자주 망각하여 이를 관리할 프로그램 필요.
+사용하는 비밀번호를 저장하는 애플리케이션.
+React를 사용하여 웹으로 개발되었으며, Electron으로 포팅하여 데스트톱앱으로 사용.
+여러 PC에서 공유해서 사용할 수 있도록 외부 저장소 GIST에 암호화하여 관리.
 
-쓸만한 서비스들은 유료로 제공.
+## UI 변경
 
-그래서 노션을 데이터베이스하여 서비스를 제작하게됨.
+### v1
+
+![before]('/assets/before.png')
+
+### v2
+
+![after]('/assets/after.png')
 
 ## 기술스택
 
 1. React
 2. Electron
-3. @notion/client
+3. gist api
+4. react-query
