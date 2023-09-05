@@ -10,11 +10,11 @@ React를 사용하여 웹으로 개발되었으며, Electron으로 포팅하여 
 
 ### v1
 
-![before]('/assets/before.png')
+![before](/assets/before.png)
 
 ### v2
 
-![after]('/assets/after.png')
+![after](/assets/after.png)
 
 ## 기술스택
 
